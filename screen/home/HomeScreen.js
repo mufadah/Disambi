@@ -7,8 +7,7 @@ const HomeScreen = ({navigation}) => {
     const [load, setLoad]=useState(false)
 
     const hapus =()=>{
-        AsyncStorage.removeItem('username')
-        AsyncStorage.removeItem('password')
+        AsyncStorage.removeItem('token')
         navigation.navigate('Login')
     }
     const potong =()=>{
