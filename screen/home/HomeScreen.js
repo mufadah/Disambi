@@ -1,4 +1,4 @@
-import { FlatList, Image, RefreshControl, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Button, FlatList, Image, RefreshControl, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { memo, useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
@@ -6,6 +6,11 @@ const HomeScreen = ({navigation}) => {
     const [data, setData] = useState([])
     const [load, setLoad]=useState(false)
 
+    const hapus =()=>{
+        AsyncStorage.removeItem('username')
+        AsyncStorage.removeItem('password')
+        navigation.navigate('Login')
+    }
     const potong =()=>{
         AsyncStorage.getItem('username')
         .then((value) => {
@@ -67,6 +72,9 @@ const HomeScreen = ({navigation}) => {
       <View style={styles.header}>
         <Text>{potong}</Text>
         <Text style={styles.Text}>Home</Text>
+        <TouchableOpacity style={styles.logout} onPress={()=>hapus()}>
+            <Text>Log Out</Text>
+        </TouchableOpacity>
       </View>
       <FlatList 
       refreshControl={
@@ -93,14 +101,15 @@ const styles = StyleSheet.create({
     },
     Text:{
         color:'black',
-        fontSize:20
+        fontSize:20,
+        marginRight:-50
     },
     header:{
         width:'100%',
         height:70,
         backgroundColor:'#047cd2',
         alignItems:'center',
-        justifyContent:'center',
+        justifyContent:'space-between',
         borderBottomRightRadius:20,
         borderBottomLeftRadius:20,
         flexDirection:'row'
@@ -141,6 +150,11 @@ const styles = StyleSheet.create({
         marginRight:20,
         alignItems:'center',
         justifyContent:'center'
+    },
+    logout:{
+        width:90,
+        height:50,
+        marginTop:25
     }
 
 })
