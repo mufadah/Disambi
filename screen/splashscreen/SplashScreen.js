@@ -9,10 +9,14 @@ const SplashScreen = ({navigation}) => {
         .then((value) => {
             console.log(value)
             if(value){
-                navigation.replace('Home')
+                setTimeout(() => {
+                    navigation.replace('Home')
+                }, 4000);
             } 
             else{
-                navigation.replace('Login')
+                setTimeout(() => {
+                    navigation.replace('Login')
+                }, 4000);
             }
         })
     })
